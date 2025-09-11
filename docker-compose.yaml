@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # Container untuk aplikasi Node.js
+  app:
+    build: 
+      context: ./src
+      dockerfile: Dockerfile
+    container_name: iot-app
+    ports:
+      - "3000:3000"
+      - "8080:8080"
+    volumes:
+      - D:/my-github-research/iot/iot-platform/src:/app
+    depends_on:
+      - rabbitmq
+      - mongodb
+    command: /bin/bash -c "npm install && node history-server.js & node realtime-server.js & node save-payload.js"
+    networks:
+      - iot-network
+
+  # Container untuk RabbitMQ
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    container_name: rabbitmq-broker
+    ports:
+      - "5672:5672" 
+      - "15672:15672"
+    networks:
+      - iot-network
+
+  # Container untuk broker MQTT (HiveMQ)
+  mqtt-broker:
+    image: "hivemq/hivemq-ce"
+    container_name: mqtt-broker
+    ports:
+      - "1883:1883" 
+      - "8000:8000"
+    networks:
+      - iot-network
+
+  # Container untuk MongoDB Time Series
+  mongodb:
+    image: "mongo:latest"
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - iot-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  iot-network:
+    driver: bridge
