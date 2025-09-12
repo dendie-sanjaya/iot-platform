@@ -1,0 +1,14 @@
+1. Rabbmit MQ 
+
+URL : http://localhost:15672/
+Username: guest
+Password: guest
+
+
+2. MongoDB 
+
+URL : http://localhost:27017
+Username: 
+Password: 
+
+
