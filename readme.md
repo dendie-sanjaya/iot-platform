@@ -18,7 +18,7 @@ Chapter 5: Data Subscription and Delivery
 
 Chapter 6: Key Component Functions
 
-Chatper 7: Deploy Tools (Rabbmit MQ) using Docker
+Chatper 7: Deploy Tools (RabbmitMQ, MQTT Broker, MongoDB) using Docker
 
 
 ## **Chapter 1: The Waking Sensor (Device IoT)**
@@ -68,6 +68,7 @@ Run program brige mqtt to rabbitmq
 
 ![ss](./ss/sample-bridge-mqtt-to-rabbitmq-2.png)
 
+![ss](./ss/rabbit-mq-1.png)
 
 ## **Chapter 4: The Dual Crossroad (RabbitMQ Message Bus)**
 
@@ -87,6 +88,15 @@ Run program save payload to mongo
 ![ss](./ss/save-payload-ke-mongodb.png)
 
 
+![ss](./ss/rabbit-mq-2.png)
+
+
+![ss](./ss/rabbit-mq-3.png)
+
+
+![ss](./ss/rabbit-mq-4.png)
+
+
 ### 4.2 Realtime Data Service (realtime-server.js).
 
 Run program realtime data
@@ -94,21 +104,39 @@ Run program realtime data
 ![ss](./ss/realtime-1.png)
 
 
+![ss](./ss/realtime-2.png)
+
+
 ## **5. Chapter 5: Data Subscription and Delivery**
 
 After leaving RabbitMQ, the data moves along two parallel paths, each serving different needs:
 
-Path A: Permanent Storage (Historical)
+### Path A: Permanent Storage (Historical)
 
-Component: save-payload.js
+**Component: save-payload.js**
 
 Function: This consumer is responsible for taking each message from RabbitMQ, processing it, and storing it permanently in the MongoDB Timeseries Database. This creates an indelible history record.
 
-Output: sensor-history.js
+```
+ cd backend  /src/backend/
+ node save-payload.js
+```
+
+![ss](./ss/save-payload-ke-mongodb.png)
+
+![ss](./ss/mongodb.png)
+
+**Output: sensor-history.js**
 
 Service: This Express/Node.js service serves the stored data via HTTP Protocol (RESTful API). This is what you successfully tested with Postman on localhost:4000, returning historical data based on time and deviceId filters.
+![ss](./ss/mongodb.png)
 
-Path B: Instant Presentation (Realtime)
+![ss](./ss/mongodb-data-history-1.png)
+
+![ss](./ss/mongodb-data-history-2.png)
+
+
+### Path B: Instant Presentation (Realtime)
 
 Component: realtime-server.js
 
@@ -119,6 +147,19 @@ Protocol: This server uses the WebSocket Protocol (ws://...:6000). WebSocket mai
 Output: App Realtime Data Sensor
 
 Function: The web application or dashboard that subscribes to this WebSocket connection receives the sensor data in realtime without needing to perform polling (repeatedly requesting data).
+
+```
+ cd backend  /src/backend/
+ node realtime-server.js
+```
+
+![ss](./ss/realtime-1.png)
+
+
+![ss](./ss/realtime-2.png)
+
+
+![ss](./ss/realtime-3.png)
 
 ## **6.  Key Component Functions**
 
@@ -155,6 +196,14 @@ Function: The web application or dashboard that subscribes to this WebSocket con
     Protocol/Technology: WebSock
 
 
-**Chapter 7: Deploy Tools (Rabbmit MQ) using Docker**    
+**Chapter 7: Deploy Tools (RabbmitMQ, MQTT Broker, MongoDB) using Docker**    
+
+For deploy RabbmitMQ, MQTT Broker, MongoDB) canuser docker compose 
+
+```
+  docker-compose up -d
+```
+
+![ss](./ss/docker.png)
 
   
