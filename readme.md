@@ -31,6 +31,18 @@ Action: The device routinely reads data (e.g., Temperature 28 Degrees, Humidity 
 
 Protocol: Messages are sent using the MQTT Protocol, which is highly efficient and suitable for unstable networks or power-constrained devices.
 
+Run device simulator for send data sensor
+```
+ cd backend  /src/simulator/
+ node device-simulator.js
+``` 
+![ss](./ss/sample-client-send-data-ke-mqtt-1.png)
+
+
+This show data sensor was send to mqtt broker 
+
+![ss](./ss/sample-client-send-data-ke-mqtt-2.png)
+
 
 ## **Chapter 2: The Busy Data Gate (MQTT Broker)**
 
