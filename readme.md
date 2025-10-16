@@ -163,40 +163,40 @@ Function: The web application or dashboard that subscribes to this WebSocket con
 
 ## **6.  Key Component Functions**
 
-6.1 Device Sensor IoT
-    Function & Role: Data source; measures and transmits data payload.
-    Protocol/Technology: MQTT Protocol
+**6.1 Device Sensor IoT**
+Function & Role: Data source; measures and transmits data payload.
+Protocol/Technology: MQTT Protocol
 
-6.2 MQTT Broker
-    Function & Role: First hub; receives and forwards messages from devices to the backend system.
-    Protocol/Technology: MQTT
+**6.2 MQTT Broker**
+Function & Role: First hub; receives and forwards messages from devices to the backend system.
+Protocol/Technology: MQTT
 
-6.3 mqtt-rabbitmq-bridge.js
-    Function & Role: Translator bridge; takes MQTT data and publishes it to RabbitMQ.
-    Protocol/Technology: Node.js, MQTT Client, AMQP
+**6.3 mqtt-rabbitmq-bridge.js**
+Function & Role: Translator bridge; takes MQTT data and publishes it to RabbitMQ.
+Protocol/Technology: Node.js, MQTT Client, AMQP
 
-6.4 RabbitMQ
-    Function & Role: Message Bus. Guarantees reliable data delivery and distributes a single message to multiple consumers (Historical & Realtime).
-    Protocol/Technology: AMQP
+**6.4 RabbitMQ**
+Function & Role: Message Bus. Guarantees reliable data delivery and distributes a single message to multiple consumers (Historical & Realtime).
+Protocol/Technology: AMQP
 
-6.5 save-payload.js
-    Function & Role: RabbitMQ Consumer; responsible for persistent data storage in the database.
-    Protocol/Technology: Node.js, Mongoose, MongoDB
+**6.5 save-payload.js**
+Function & Role: RabbitMQ Consumer; responsible for persistent data storage in the database.
+Protocol/Technology: Node.js, Mongoose, MongoDB
 
-6.6 MongoDB Timeseries
-    Function & Role: Specialized database for storing time-series data efficiently (history).
-    Protocol/Technology: Database
+**6.6 MongoDB Timeseries**
+Function & Role: Specialized database for storing time-series data efficiently (history).
+Protocol/Technology: Database
 
-6.7 sensor-history.js
-    Function & Role: Serves the stored historical data upon user request.
-    Protocol/Technology: HTTP (RESTful API)
+**6.7 sensor-history.js**
+Function & Role: Serves the stored historical data upon user request.
+Protocol/Technology: HTTP (RESTful API)
 
-6.8 realtime-server.js
-    Function & Role: Streams the latest data instantly to connected web clients.
-    Protocol/Technology: WebSock
+**6.8 realtime-server.js**
+Function & Role: Streams the latest data instantly to connected web clients.
+Protocol/Technology: WebSock
 
 
-**Chapter 7: Deploy Tools (RabbmitMQ, MQTT Broker, MongoDB) using Docker**    
+## **Chapter 7: Deploy Tools (RabbmitMQ, MQTT Broker, MongoDB) using Docker**    
 
 For deploy RabbmitMQ, MQTT Broker, MongoDB) canuser docker compose 
 
