@@ -204,6 +204,6 @@ For deploy RabbmitMQ, MQTT Broker, MongoDB) canuser docker compose
   docker-compose up -d
 ```
 
-![ss](./ss/docker.png)
+![ss](./ss/dokcer.png)
 
   
