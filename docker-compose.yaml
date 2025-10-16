@@ -1,24 +1,6 @@
 version: '3.8'
 
 services:
-  # Container untuk aplikasi Node.js
-  app:
-    build: 
-      context: ./src
-      dockerfile: Dockerfile
-    container_name: iot-app
-    ports:
-      - "3000:3000"
-      - "8080:8080"
-    volumes:
-      - D:/my-github-research/iot/iot-platform/src:/app
-    depends_on:
-      - rabbitmq
-      - mongodb
-    command: /bin/bash -c "npm install && node history-server.js & node realtime-server.js & node save-payload.js"
-    networks:
-      - iot-network
-
   # Container untuk RabbitMQ
   rabbitmq:
     image: "rabbitmq:3-management"
