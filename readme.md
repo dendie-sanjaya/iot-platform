@@ -39,11 +39,6 @@ Run device simulator for send data sensor
 ![ss](./ss/sample-client-send-data-ke-mqtt-1.png)
 
 
-This show data sensor was send to mqtt broker 
-
-![ss](./ss/sample-client-send-data-ke-mqtt-2.png)
-
-
 ## **Chapter 2: The Busy Data Gate (MQTT Broker)**
 
 The messages sent by the sensor do not go straight to the server but stop first at the MQTT Broker. This Broker acts as a distribution center that receives, validates, and forwards the messages.
@@ -52,6 +47,9 @@ Main Actor: MQTT Broker
 
 Action: It receives all MQTT messages from the Sensor Devices, keeps the connection alive, and forwards the messages to the subscribing parties (your backend services).
 
+This show data sensor was send to mqtt broker 
+
+![ss](./ss/sample-client-send-data-ke-mqtt-2.png)
 
 ## **3. Chapter 3: The Bridging Savior (mqtt-rabbitmq-bridge.js)**
 
@@ -60,6 +58,15 @@ RabbitMQ, as the main message bus, does not communicate directly with MQTT. This
 Main Actor: mqtt-rabbitmq-bridge.js (Bridge)
 
 Function: This Bridge subscribes to the topic on the MQTT Broker. Every time a new message arrives, the Bridge immediately fetches it and publishes that message to RabbitMQ (using the iot_data_exchange name). This ensures the sensor data enters the centralized processing pipeline.
+
+Run program brige mqtt to rabbitmq
+```
+ cd backend  /src/backend/
+ node mqtt-rabbitmq-bridge.js
+``` 
+![ss](./ss/sample-bridge-mqtt-to-rabbitmq.png)
+
+![ss](./ss/sample-bridge-mqtt-to-rabbitmq-2.png)
 
 
 ## **Chapter 4: The Dual Crossroad (RabbitMQ Message Bus)**
@@ -70,9 +77,21 @@ Main Actor: RabbitMQ
 
 Action: Messages received from the Bridge are immediately duplicated and sent simultaneously to two backend services:
 
-Data Storage Service (save-payload.js).
+### 4.1 Data Storage Service (save-payload.js).
 
-Realtime Data Service (realtime-server.js).
+Run program save payload to mongo
+```
+ cd backend  /src/backend/
+ node save-payload.js)
+```
+![ss](./ss/save-payload-ke-mongodb.png)
+
+
+### 4.2 Realtime Data Service (realtime-server.js).
+
+Run program realtime data
+
+![ss](./ss/realtime-1.png)
 
 
 ## **5. Chapter 5: Data Subscription and Delivery**
